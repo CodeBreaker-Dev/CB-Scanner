@@ -6,7 +6,6 @@ from colorama import Fore, init
 from tqdm import tqdm
 import sys
 import os
-from mineflayer import Connection
 
 init()
 
@@ -52,18 +51,6 @@ def save_to_file(output):
         except Exception as e:
             print(Fore.RED + f"[!] An error occurred while saving the file: {e}" + Fore.RESET)
 
-def try_bot_login(host, port):
-    try:
-        bot = Connection(host, port)
-        bot.connect()
-        bot.wait_until_logged_in()
-        print(Fore.GREEN + 'Bot logged in successfully.' + Fore.RESET)
-        bot.end()
-        return True
-    except Exception as e:
-        print(Fore.RED + f'Failed to log in bot: {e}' + Fore.RESET)
-        return False
-
 def main():
     os.system('cls')
     print(Fore.RED + r"   _____          _        ____                 _                 ")
@@ -81,6 +68,10 @@ def main():
     print(r"            |_____/ \___\__,_|_| |_|_| |_|\___|_|                 ")
     print("                                                                  ")
     print(Fore.RESET)
+
+    print('               Welcome to '+ Fore.RED + 'CodeBreakers ' + Fore.RESET + 'Scanner')
+    print('        Made by: '+ Fore.LIGHTRED_EX +'CB Team ' + Fore.RESET +' | Discord: ' + Fore.LIGHTRED_EX + 'discord.gg/8PtwWXnT5w' + Fore.RESET)
+    print('')
 
     try:
         ip = socket.gethostbyname(input(Fore.LIGHTBLACK_EX + '[' + Fore.RED + 'CB' + Fore.LIGHTRED_EX +' Scanner' + Fore.LIGHTBLACK_EX + '] ' +  Fore.RESET + 'Enter the IP address you want to scan (mc.example.com): '))
@@ -139,9 +130,6 @@ def main():
                         temp_output += Fore.RED + 'Players : ' + Fore.RESET + f'{status.players.online}/{status.players.max}\n'
                         temp_output += '\n'
                         found_open_ports = True
-                        # Tentativa de login do bot
-                        print(Fore.LIGHTBLACK_EX + f'Trying to log in bot on {host}:{port}' + Fore.RESET)
-                        try_bot_login(host, port)
             if found_open_ports:
                 output += temp_output
             else:
